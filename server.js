@@ -3,7 +3,9 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = 5000;
-const SECRET_KEY = "iRB&3|}PkrLo)D2@3XM|`/T]3wj!d=A^:QdudXiV:*{trKl1D}Uy5%3Ne|4R8Gl"
+const SECRET_KEY = "iRB&3|}PkrLo)D2@3XM|`/T]3wj!d=A^:QdudXiV:*{trKl1D}Uy5%3Ne|4R8Gl" 
+
+// process.env.JWT_SECRET
 
 app.use(express.json());
 
@@ -119,7 +121,7 @@ app.post('/cart/checkout', authenticate, (req, res) => {
   const userCart = carts[req.user.username] || [];
   orders.push({ username: req.user.username, items: userCart });
   carts[req.user.username] = [];
-  res.json({ message: 'Checkout successful.' });
+  res.json({ message: 'You have Checked out successful.' });
 });
 
 app.get('/orders', authenticate, (req, res) => {
@@ -129,7 +131,7 @@ app.get('/orders', authenticate, (req, res) => {
 
 app.get('/orders/:id', authenticate, (req, res) => {
   const order = orders.find(o => o.id === parseInt(req.params.id) && o.username === req.user.username);
-  if (!order) return res.status(404).json({ message: 'Order not found.' });
+  if (!order) return res.status(404).json({ message: 'Order not likely found.' });
   res.json(order);
 });
 
@@ -139,7 +141,7 @@ app.get('/admin/orders', authenticate, authorizeAdmin, (req, res) => {
 
 app.put('/admin/orders/:id', authenticate, authorizeAdmin, (req, res) => {
   const order = orders.find(o => o.id === parseInt(req.params.id));
-  if (!order) return res.status(404).json({ message: 'Order not found.' });
+  if (!order) return res.status(404).json({ message: 'Order not likely found.' });
 
  
   res.json({ message: 'Order updated.' });

@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const { auth } = require('../firebase');
 
 const authenticate = async (req, res, next) => {
   const token = req.header('Authorization')?.split(' ')[1];
@@ -15,7 +14,7 @@ const authenticate = async (req, res, next) => {
 };
 
 const authorizeAdmin = (req, res, next) => {
-  if (req.user.role !== 'admin') return res.status(403).json({ message: 'Admin access required' });
+  if (req.user.role !== 'admin') return res.status(403).json({ message: 'you are not an admin so no access for you! ' });
   next();
 };
 

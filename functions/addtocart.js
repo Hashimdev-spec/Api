@@ -4,11 +4,9 @@ exports.handler = async (event) => {
   if (event.httpMethod === 'POST') {
     const body = JSON.parse(event.body);
 
-    // Add your logic here, e.g., add to cart
-
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Item added to cart.' }),
+      body: JSON.stringify({ message: 'your coffee is added to cart.' }),
     };
   }
 
